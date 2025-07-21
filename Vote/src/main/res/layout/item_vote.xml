@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/historyItemCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardUseCompatPadding="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:backgroundTint="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Gambar Kandidat -->
+        <ImageView
+            android:id="@+id/historyImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/candidate_image"
+            android:src="@drawable/sample_image"
+            android:background="@android:color/darker_gray" />
+
+        <!-- Nama Kandidat -->
+        <TextView
+            android:id="@+id/candidateName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calon"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/color_text_light_primary"
+            android:fontFamily="@font/popbold" />
+
+        <!-- Garis Pembatas -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- Deskripsi -->
+        <TextView
+            android:id="@+id/candidateDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deskripsi_calon"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/color_text_light_primary"
+            android:fontFamily="@font/popreg"
+            android:lineSpacingExtra="4dp"
+            android:contentDescription="deskripsi calon" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

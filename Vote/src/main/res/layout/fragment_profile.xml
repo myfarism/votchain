@@ -1,0 +1,246 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".profile.ProfileFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Header View -->
+        <View
+            android:id="@+id/headerView"
+            android:layout_width="415dp"
+            android:layout_height="124dp"
+            android:background="@color/color_toolbar_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <FrameLayout
+            android:id="@+id/profileImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/yourName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/name"
+            android:textColor="@color/color_text_light_primary"
+            android:fontFamily="@font/popreg"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileImage"
+            app:layout_constraintVertical_bias="0.041" />
+
+        <!-- Edit Profile Section (Container for Image and Text) -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dataDiriContainer"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:layout_marginTop="60dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toBottomOf="@+id/yourName"
+            tools:layout_editor_absoluteX="4dp">
+
+            <ImageView
+                android:id="@+id/imageViewDataDiri"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_person_profile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/editDataDiri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="23dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/popreg"
+                android:text="@string/edit_profil"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/imageViewDataDiri"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DEDEDE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dataDiriContainer" />
+
+        <!-- Divider for Edit Profile -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/pengaturanContainer"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toBottomOf="@+id/dataDiriContainer"
+            tools:layout_editor_absoluteX="4dp">
+
+            <ImageView
+                android:id="@+id/imageViewEditProfile"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_setting_profile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/editProfileText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="23dp"
+                android:text="Pengaturan"
+                android:textColor="@color/black"
+                android:fontFamily="@font/popreg"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@id/imageViewEditProfile"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Data Diri Section (Wrap Text and Icon in a container) -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DEDEDE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pengaturanContainer" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/riwayatContainer"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toBottomOf="@+id/pengaturanContainer">
+
+            <ImageView
+                android:id="@+id/imageViewRiwayat"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_history_profile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/riwayatText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="23dp"
+                android:text="@string/riwayat"
+                android:textColor="@color/black"
+                android:fontFamily="@font/popreg"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/imageViewRiwayat"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Divider for Data Diri -->
+
+        <!-- Logout Section -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DEDEDE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/riwayatContainer" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/logoutContainer"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toBottomOf="@+id/riwayatContainer">
+
+            <ImageView
+                android:id="@+id/imageViewLogout"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="47dp"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/ic_logout_profile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/logoutText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="23dp"
+                android:text="@string/keluar"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/popreg"
+                app:layout_constraintStart_toEndOf="@id/imageViewLogout"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Divider for Logout -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DEDEDE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logoutContainer" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/logo_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logoutContainer" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

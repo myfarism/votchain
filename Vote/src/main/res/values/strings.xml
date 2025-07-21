@@ -1,0 +1,11 @@
+<resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="candidate_image">Foto kandidat</string>
+    <string name="calon">CALON A</string>
+    <string name="deskripsi_calon">deskripsi calon</string>
+    <string name="name">name</string>
+    <string name="edit_profil">Edit Profil</string>
+    <string name="riwayat">Riwayat</string>
+    <string name="keluar">Keluar</string>
+</resources>

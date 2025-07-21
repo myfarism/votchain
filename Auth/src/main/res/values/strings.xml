@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="selamat_datang_di_votchain">SELAMAT DATANG DI VOTCHAIN</string>
+    <string name="masuk">Masuk</string>
+    <string name="belum_punya_akun_buat_akun">Belum punya akun? Buat Akun</string>
+    <string name="lupa_kata_sandi">Lupa Kata Sandi?</string>
+    <string name="buat_akun">BUAT AKUN</string>
+</resources>

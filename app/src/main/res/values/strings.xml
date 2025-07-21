@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">votchain</string>
+    <string name="title_auth">Module Title</string>
+    <string name="title_vote">Voting</string>
+    <string name="votchain">VOTCHAIN</string>
+    <string name="logo">Logo</string>
+    <string name="tidak_punya_akun_buat_akun">Tidak Punya Akun? Buat AKun</string>
+</resources>
