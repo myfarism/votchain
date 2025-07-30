@@ -24,33 +24,54 @@
             app:layout_constraintVertical_bias="0.0" />
 
 
-        <FrameLayout
-            android:id="@+id/profileImage"
+        <LinearLayout
+            android:id="@+id/profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </FrameLayout>
+            <TextView
+                android:id="@+id/yourName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popreg"
+                android:gravity="center"
+                android:text="@string/name"
+                android:textColor="@color/color_text_light_primary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="146dp"
+                tools:layout_editor_absoluteY="19dp" />
 
-        <TextView
-            android:id="@+id/yourName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/name"
-            android:textColor="@color/color_text_light_primary"
-            android:fontFamily="@font/popreg"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileImage"
-            app:layout_constraintVertical_bias="0.041" />
+            <TextView
+                android:id="@+id/yourProdi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="prodi"
+                android:textColor="@color/color_text_light_primary"
+                android:fontFamily="@font/popreg"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/yourAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="address"
+                android:layout_margin="15dp"
+                android:textColor="@color/color_text_light_primary"
+                android:fontFamily="@font/popreg"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
 
         <!-- Edit Profile Section (Container for Image and Text) -->
 
@@ -62,7 +83,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            app:layout_constraintTop_toBottomOf="@+id/yourName"
+            app:layout_constraintTop_toBottomOf="@+id/profile"
             tools:layout_editor_absoluteX="4dp">
 
             <ImageView
@@ -241,6 +262,7 @@
             app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logoutContainer" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

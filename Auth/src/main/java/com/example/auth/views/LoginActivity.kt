@@ -2,6 +2,7 @@ package com.example.auth.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -48,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.emailEditText.text.toString().trim()
         val password = binding.passwordEditText.text.toString()
 
-        viewModel.login(email, password)
+        viewModel.login(this, email, password)
     }
 
     private fun observeViewModel() {
@@ -69,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
                         binding.progressBar.visibility = View.GONE
                         binding.buttonMasuk.isEnabled = true
                         Toast.makeText(this@LoginActivity, state.message, Toast.LENGTH_SHORT).show()
+                        Log.d("LOGIN Error", state.message)
                     }
                     else -> {}
                 }
