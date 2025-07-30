@@ -1,50 +1,120 @@
 package com.example.auth.core.util
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider
-import org.web3j.crypto.ECKeyPair
-import org.web3j.crypto.Hash
-import org.web3j.crypto.Keys
-import org.web3j.crypto.Sign
+import org.web3j.crypto.*
 import org.web3j.utils.Numeric
-import java.nio.charset.Charset
 import java.security.Security
-import kotlin.text.Charsets
+import java.security.SecureRandom
 
 object EthUtils {
+
     init {
-        Security.addProvider(BouncyCastleProvider())
+        // Initialize BouncyCastle provider
+        setupBouncyCastle()
     }
 
-    fun generateNewWallet(): Wallet {
-        val ecKeyPair = Keys.createEcKeyPair()
-        return Wallet(
-            privateKey = Numeric.toHexStringNoPrefix(ecKeyPair.privateKey),
-            publicKey = Numeric.toHexStringNoPrefix(ecKeyPair.publicKey),
-            address = Keys.toChecksumAddress(Keys.getAddress(ecKeyPair))
-        )
+    private fun setupBouncyCastle() {
+        try {
+            // Remove existing BC provider if present
+            Security.removeProvider("BC")
+            // Add BouncyCastle provider
+            Security.addProvider(BouncyCastleProvider())
+
+            // Verify the provider is available
+            val provider = Security.getProvider("BC")
+            if (provider == null) {
+                throw RuntimeException("BouncyCastle provider not available")
+            }
+        } catch (e: Exception) {
+            throw RuntimeException("Failed to setup BouncyCastle provider", e)
+        }
     }
 
-    fun signMessage(message: String, privateKey: String): String {
-        val privateKeyBytes = Numeric.hexStringToByteArray(privateKey)
-        val ecKeyPair = ECKeyPair.create(privateKeyBytes)
+    data class WalletData(
+        val address: String,
+        val privateKey: String,
+        val publicKey: String
+    )
 
-        // Convert message to bytes and hash it
-        val messageHash = Hash.sha3(message.toByteArray(Charsets.UTF_8))
+    fun generateNewWallet(): WalletData {
+        try {
+            // Ensure BouncyCastle is set up
+            setupBouncyCastle()
 
-        // Sign the message hash
-        val signatureData = Sign.signMessage(messageHash, ecKeyPair, false)
+            // Generate a new EC key pair using Web3j
+            val ecKeyPair = Keys.createEcKeyPair()
 
-        // Format the signature components
-        val r = Numeric.toHexStringNoPrefix(signatureData.r)
-        val s = Numeric.toHexStringNoPrefix(signatureData.s)
-        val v = signatureData.v.toString()
+            // Get the credentials
+            val credentials = Credentials.create(ecKeyPair)
 
-        return "0x$r${s.padStart(64, '0')}$v"
+            // Extract wallet data
+            val address = credentials.address
+            val privateKey = Numeric.toHexStringWithPrefix(ecKeyPair.privateKey)
+            val publicKey = Numeric.toHexStringWithPrefix(ecKeyPair.publicKey)
+
+            return WalletData(
+                address = address,
+                privateKey = privateKey,
+                publicKey = publicKey
+            )
+        } catch (e: Exception) {
+            throw RuntimeException("Failed to generate wallet: ${e.message}", e)
+        }
+    }
+
+    fun signMessage(message: String, privateKeyHex: String): String {
+        try {
+            // Ensure BouncyCastle is set up
+            setupBouncyCastle()
+
+            // Remove '0x' prefix if present
+            val cleanPrivateKey = privateKeyHex.removePrefix("0x")
+
+            // Create credentials from private key
+            val credentials = Credentials.create(cleanPrivateKey)
+
+            // Sign the message
+            val signatureData = Sign.signPrefixedMessage(message.toByteArray(), credentials.ecKeyPair)
+
+            // Convert signature to hex string
+            val r = Numeric.toHexString(signatureData.r)
+            val s = Numeric.toHexString(signatureData.s)
+            val v = signatureData.v.toString()
+
+            // Concatenate r, s, v
+            return "${r}${s.removePrefix("0x")}${v.padStart(2, '0')}"
+
+        } catch (e: Exception) {
+            throw RuntimeException("Failed to sign message: ${e.message}", e)
+        }
+    }
+
+    fun verifySignature(message: String, signature: String, expectedAddress: String): Boolean {
+        try {
+            // Ensure BouncyCastle is set up
+            setupBouncyCastle()
+
+            // Parse signature
+            val r = signature.substring(0, 64)
+            val s = signature.substring(64, 128)
+            val v = signature.substring(128, 130).toInt(16).toByte()
+
+            val signatureData = Sign.SignatureData(
+                v,
+                Numeric.hexStringToByteArray("0x$r"),
+                Numeric.hexStringToByteArray("0x$s")
+            )
+
+            // Recover public key from signature
+            val publicKey = Sign.signedPrefixedMessageToKey(message.toByteArray(), signatureData)
+
+            // Get address from public key
+            val recoveredAddress = "0x" + Keys.getAddress(publicKey)
+
+            return recoveredAddress.equals(expectedAddress, ignoreCase = true)
+
+        } catch (e: Exception) {
+            return false
+        }
     }
 }
-
-data class Wallet(
-    val privateKey: String,
-    val publicKey: String,
-    val address: String
-)

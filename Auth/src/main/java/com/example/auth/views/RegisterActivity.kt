@@ -2,6 +2,7 @@ package com.example.auth.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -120,8 +121,23 @@ class RegisterActivity : AppCompatActivity() {
                         binding.progressBar.visibility = View.GONE
                         binding.btnDaftar.isEnabled = true
                         Toast.makeText(this@RegisterActivity, state.message, Toast.LENGTH_SHORT).show()
+                        Log.d("RegisterActivity", "Error: ${state.message}")
                     }
-                    else -> {}
+                    is AuthState.RequiresVerification -> {
+                        binding.progressBar.visibility = View.GONE
+                        binding.btnDaftar.isEnabled = true
+                        Toast.makeText(this@RegisterActivity, state.message, Toast.LENGTH_SHORT).show()
+
+                        // Navigate to OTP verification activity
+                        val intent = Intent(this@RegisterActivity, VerifyEmailActivity::class.java)
+                        intent.putExtra("email", state.email)
+                        startActivity(intent)
+                        // Don't finish() here so user can come back if needed
+                    }
+                    is AuthState.Idle -> {
+                        binding.progressBar.visibility = View.GONE
+                        binding.btnDaftar.isEnabled = true
+                    }
                 }
             }
         }
